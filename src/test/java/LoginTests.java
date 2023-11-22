@@ -1,16 +1,19 @@
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 
 public class LoginTests extends BaseTest {
     LoginPage loginPage;
     
-    public LoginTests() throws Exception {
+    @BeforeClass
+    public void testSetup() {
+        driver.get("https://the-internet.herokuapp.com/login");
         loginPage = new LoginPage(driver);
     }
 
     @Test
-    public void login_ValidCredentials_ReturnsSuccessful() {        
+    public void login_ValidCredentials_ReturnsSuccessful() {       
         loginPage.login("tomsmith", "SuperSecretPassword!");
 
         boolean isLoggedIn = loginPage.isLoggedIn();
