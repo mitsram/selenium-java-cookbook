@@ -14,7 +14,7 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void login_ValidCredentials_ReturnsSuccessful() {       
-        loginPage.login("tomsmith", "SuperSecretPassword!");
+        loginPage.login(dotenv.get("USERNAME"), dotenv.get("PASSWORD"));
 
         boolean isLoggedIn = loginPage.isLoggedIn();
         Assert.assertTrue(isLoggedIn);
