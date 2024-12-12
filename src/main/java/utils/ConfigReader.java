@@ -17,6 +17,11 @@ public class ConfigReader {
     }
 
     public static String getProperty(String key) {
+        // Check environment variable first, then fall back to properties file
+        String envValue = System.getenv(key.toUpperCase().replace(".", "_"));
+        if (envValue != null) {
+            return envValue;
+        }
         return properties.getProperty(key);
     }
 }

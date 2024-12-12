@@ -4,17 +4,17 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.InventoryPage;
-import utils.ConfigReader;
+import utils.AppConfig;
 
 public class LoginTests extends BaseTest {
 
     @Test
-    public void testSuccessfulLogin() {
+    public void testSuccessfulLogin() {        
+        String username = AppConfig.getEnvVariable("SAUCEDEMO_USERNAME");
+        String password = AppConfig.getEnvVariable("SAUCEDEMO_PASSWORD");
+
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login(
-            ConfigReader.getProperty("username"), 
-            ConfigReader.getProperty("password")
-        );
+        loginPage.login(username, password);
         
         InventoryPage inventoryPage = new InventoryPage(driver);
         Assert.assertTrue(inventoryPage.getInventoryItemCount() > 0, "Inventory page not loaded");
